@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('maven Build Master') {
+            steps {
+                echo 'Demo Recursion'
+                sh 'mvn -version'
+                dir("$WORKSPACE/")
+                {
+                    sh 'pwd'
+                    sh 'mvn clean compile package'
+                    sh 'ls -al'
+                }
+            }
+        }
+    }
+}
