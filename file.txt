@@ -1,2 +1,0 @@
-git stash
-git stashed file pushed into git hub
