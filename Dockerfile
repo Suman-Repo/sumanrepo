@@ -16,9 +16,15 @@ COPY . .
 # Building our application
 RUN npm run build
 
-# Expose port 3000, where the React app will run
-EXPOSE 3000
+# Install Nginx
+FROM nginx:alpine
 
-# Start the app using react-scripts
-CMD ["npm", "start"]
+# Copy build files to Nginx's default html directory
+COPY --from=0 /app/build /usr/share/nginx/html
+
+# Expose port 80, where the React app will run
+EXPOSE 80
+
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]
 
